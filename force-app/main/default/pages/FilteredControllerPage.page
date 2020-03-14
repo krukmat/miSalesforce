@@ -1,0 +1,52 @@
+<apex:page standardController="Contact" recordSetVar="contacts" extensions="FilteredContactList">  
+  <apex:form >  
+    <apex:inputText value="{!searchstring}" label="Input"/>   
+      <apex:commandButton value="Search records" action="{!search}"/>  
+        
+       <apex:pageBlock title="Search Result" id="contacts_list">  
+            <apex:pageblockTable value="{!contacts}" var="c">  
+             <apex:column >  
+              <apex:outputlink value="/{!c.id}">{!c.Name}</apex:outputlink>  
+             </apex:column>  
+             <apex:column value="{!c.email}"/>  
+             <apex:column value="{!c.phone}"/>   
+            </apex:pageBlockTable>
+            <table style="width: 100%">
+            <tr>
+
+                <td>
+                    Page: <apex:outputText value=" {!PageNumber} of {! TotalPageNumber }"/>
+                </td>            
+
+                <td align="center">
+                    <!-- Previous page -->
+                    <!-- active -->
+                    <apex:commandLink action="{! Previous }" value="« Previous "
+                    rendered="{! HasPrevious }"/>
+                    <!-- inactive (no earlier pages) -->
+                    <apex:outputText style="color: #ccc;" value="« Previous"
+                    rendered="{! NOT(HasPrevious) }"/>
+
+                    <!-- Next page -->
+                    <!-- active -->
+                    <apex:commandLink action="{! Next }" value="Next »"
+                    rendered="{! HasNext }"/>
+                    <!-- inactive (no more pages) -->
+                    <apex:outputText style="color: #ccc;" value="Next »"
+                    rendered="{! NOT(HasNext) }"/>
+                </td>
+
+                <td align="right">
+                    Records per page:
+                    <apex:selectList value="{! PageSize }" size="1">
+                        <apex:selectOption itemValue="5" itemLabel="5"/>
+                        <apex:selectOption itemValue="20" itemLabel="20"/>
+                        <apex:actionSupport event="onchange" reRender="contacts_list"/>
+                    </apex:selectList>
+                </td>
+                    
+            </tr>
+            </table>
+       </apex:pageBlock>   
+  </apex:form>  
+ </apex:page>

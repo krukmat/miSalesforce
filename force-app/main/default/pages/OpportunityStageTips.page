@@ -1,0 +1,16 @@
+<apex:page docType="html-5.0" standardController="Opportunity" title="Tips based on Stage">
+    <apex:pageBlock >
+        	<apex:outputpanel rendered="{!opportunity.stageName == 'Prospecting'}">
+                <span>lalalalala</span>
+        	</apex:outputpanel>
+        	<apex:outputpanel rendered="{!opportunity.stageName == 'Needs Analysis'}">
+                <span>lololololo</span>
+        	</apex:outputpanel>
+        	<apex:outputpanel rendered="{!opportunity.stageName == 'Proposal/Price Quote'}">
+                <span>lululululu</span>
+        	</apex:outputpanel>
+        	<apex:outputpanel rendered="{!opportunity.stageName == 'Negotiation/Review'}">
+                <span>lululululu</span>
+        	</apex:outputpanel>
+    </apex:pageBlock>    
+</apex:page>

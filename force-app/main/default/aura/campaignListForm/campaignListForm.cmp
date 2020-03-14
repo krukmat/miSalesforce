@@ -1,0 +1,66 @@
+<aura:component >
+	  <div aria-labelledby="newcampinglistform">
+
+	  <!-- BOXED AREA -->
+	  <fieldset class="slds-box slds-theme--default slds-container--small">
+
+	    <legend id="newcampinglistform" class="slds-text-heading--small 
+	      slds-p-vertical--medium">
+	      Add Camping List
+	    </legend>
+
+		    <!-- CREATE NEW EXPENSE FORM -->
+		    <form class="slds-form--stacked">
+
+		      <div class="slds-form-element slds-is-required">
+		          <div class="slds-form-element__control">
+		              <ui:inputText aura:id="clname" label="Camping List Name"
+		                  class="slds-input"
+		                  labelClass="slds-form-element__label"
+		                  value="{!v.newItem.Name}"
+		                  required="true"/>
+		          </div>
+		     </div>
+
+		     <div class="slds-form-element slds-is-required">
+		          <div class="slds-form-element__control">
+		              <ui:inputNumber aura:id="quantity" label="Quantity"
+		                  class="slds-input"
+		                  labelClass="slds-form-element__label"
+		                  value="{!v.newItem.Quantity__c}"
+		                  required="true"/>
+
+		          </div>
+		      </div>
+
+		      <div class="slds-form-element">
+		          <div class="slds-form-element__control">
+		              <ui:inputCurrency aura:id="price" label="Price"
+		                  class="slds-input"
+		                  labelClass="slds-form-element__label"
+		                  value="{!v.newItem.Price__c}"
+		                  placeholder="0.0"/>
+		          </div>
+		      </div>
+
+		      <div class="slds-form-element">
+		          <ui:inputCheckbox aura:id="packed" label="Packed?"
+		              class="slds-checkbox"
+		              labelClass="slds-form-element__label"
+		              value="{!v.newItem.Packed__c}"/>
+		      </div>
+
+		      <div class="slds-form-element">
+		          <ui:button label="Create Item"
+		              class="slds-button slds-button--brand"
+		              press="{!c.clickCreateCampingListItem}"/>
+		      </div>
+
+		    </form>
+		    <!-- / CREATE NEW EXPENSE FORM -->
+
+	  </fieldset>
+	  <!-- / BOXED AREA -->
+
+	</div>
+</aura:component>

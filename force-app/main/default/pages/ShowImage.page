@@ -1,0 +1,5 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false">
+    <!-- Add static resources to page's <head> -->
+    <apex:image value="{! 
+                            URLFOR($Resource.vfimagetest, 'cats/kitten1.jpg') }"/>
+</apex:page>

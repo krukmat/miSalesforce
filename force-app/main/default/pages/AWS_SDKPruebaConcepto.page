@@ -1,0 +1,100 @@
+<apex:page showHeader="false" sidebar="false" cache="false" contentType="text/html" >
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.8.min.js"></script>
+    <script src="//code.jquery.com/jquery.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.66.0-2013.10.09/jquery.blockUI.min.js"></script>
+    
+    <script type="text/javascript">
+    j$ = jQuery.noConflict(); 
+
+        function msieversion() {
+            var ua = window.navigator.userAgent;
+            var msie = ua.indexOf("MSIE ");
+            if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)){
+                // If Internet Explorer, return version number
+                //document.getElementById('{!$Component.formId}').style.display = 'none';
+                //alert(parseInt(ua.substring(msie + 5, ua.indexOf(".", msie))));
+            } else {
+                // If another browser, return 0
+                //alert('otherbrowser');
+                document.getElementById('noInternetExplorer').style.display = 'none';
+            }
+            return false;
+        }
+
+        function blockme() {
+            AWS.config.update({accessKeyId: 'AKIAIOA5XA73TQIZQP4Q', secretAccessKey: '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'});
+            AWS.config.region = 'us-east-1';
+            
+            var bucket = new AWS.S3({params: {Bucket: 'media.trex.test2'}});
+            var fileChooser = document.getElementById('file-chooser');             
+            var file = fileChooser.files[0];
+
+            if (file) {
+                j$.blockUI({ css: {
+                    border: 'none',
+                    padding: '15px',
+                    backgroundColor: '#000',
+                    '-webkit-border-radius': '10px',
+                    '-moz-border-radius': '10px',
+                    opacity: .5,
+                    color: '#fff'
+                }
+                });
+
+                var finenamefull=file.name;
+                finenamefull = finenamefull.replace(/,/gi, ""); 
+                var arrayOfStrings = finenamefull.split('.');
+                var noofStrings=arrayOfStrings.length;
+                var extension=arrayOfStrings[noofStrings-1];
+                var filenamewithext=arrayOfStrings[0]+'.'+extension;
+                var params = {Key: filenamewithext, ContentType: file.type, Body: file};
+                var r = finenamefull+','+file.type;
+                var url = 'https://media.trex.test2.s3.amazonaws.com/'+filenamewithext;
+                console.log(url);
+                document.getElementById("awsId").value = r;
+                document.getElementById("urlAmazon").value = url;
+
+                bucket.putObject(params, function (err, data) {
+                    if(err){
+                        alert('Something is wrong and your file was not uploaded');
+                    }else{
+                        var z = 'status'
+                        document.getElementById("awsIdStatus").value = z;
+                        console.log(err);
+                        console.log(data);
+                        j$.unblockUI();
+                    }
+                });
+
+
+
+            } 
+            // XMLHttpRequest = Sarissa.XHR  
+        }//END FUNCTION
+
+        window.onload=function(){
+            //CHECK IF IT IS IE, AND GIVE A WARNING TO PLEASE USE A DIFFERENT BROWSER
+            msieversion();  
+        };
+
+</script>
+
+<apex:form id="form">
+    <apex:pageMessages />
+    <apex:pageBlock title="Images" mode="edit">
+        <apex:pageBlockButtons >
+            <apex:commandButton action="{!save}" value="Save"/>
+            <apex:commandButton action="{!cancel}" value="Cancel"/>
+        </apex:pageBlockButtons>
+        <apex:pageBlockSection title="Image Detail" columns="1">
+            <apex:pageBlockSectionItem >
+                <input type="file" id="file-chooser" onchange="blockme()" /> 
+            </apex:pageBlockSectionItem>
+            <input type="hidden" value="awsId" id="awsId" name="awsId"/>
+            <input type="hidden" value="awsIdStatus" id="awsIdStatus" name="awsIdStatus"/>
+            This input is hidden but for sake of excercise is displayed
+            <input type="text" value="" id="urlAmazon" name="urlAmazon"/>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:form>
+</apex:page>

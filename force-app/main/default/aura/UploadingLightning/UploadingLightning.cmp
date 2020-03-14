@@ -1,0 +1,24 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickAction">
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <!-- Needed to send messages to VF page. But we will get it from VF itself -->
+    <aura:attribute name="vfHost" type="String" default="" />
+    <!-- Domain of LC for VF to send message -->
+    <aura:attribute name="lcHost" type="String" />
+    <aura:attribute name="frameSrc" type="String" />
+    <lightning:spinner variant="brand" size="large" aura:id="globalSpinner" class="slds-hide"  />
+    
+    <div class="slds-section slds-is-open">
+        <div class="slds-grid slds-wrap slds-grid--pull-padded slds-grid--align-end">
+          <div class="slds-col--padded"> 
+            <!-- TODO: remplace for Iframe Button
+            <lightning:button variant="neutral" label="Select File" iconName="utility:upload" iconPosition="left" onclick="{!c.uploadFile}" aura:id="uploadFileButton"/>
+            <div class="slds-hide">
+              <input id="uploadFileHide" type="file" accept="image/*,video/*,.pdf" multiple="multiple" />
+            </div> -->
+            <iframe aura:id="vfFrame" src="{!v.frameSrc}" width="180" height="38" class="vfFrame" />
+            <lightning:button variant="brand" label="Upload" iconName="utility:save" iconPosition="left" onclick="{!c.saveAll}" aura:id="saveAllButton" disabled="{!empty(v.media)}" />
+          </div>
+      </div>
+    </div>
+    
+</aura:component>

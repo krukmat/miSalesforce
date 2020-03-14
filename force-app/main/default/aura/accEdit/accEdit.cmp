@@ -1,0 +1,39 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId"> <!--inherit recordId attribute-->
+
+<aura:attribute name="record" type="Object" />
+<aura:attribute name="accountRecord" type="Object" />
+<aura:attribute name="recordSaveError" type="String" />
+<ui:outputText value="Edit Account"/>
+    
+<force:recordData aura:id="recordEditor"
+    layoutType="FULL"
+    recordId="{!v.recordId}"
+    targetError="{!v.recordSaveError}"
+    targetRecord="{!v.record}"
+    targetFields="{!v.accountRecord}"
+    fields="Name"
+    recordUpdated="{!c.handleSaveRecord}"              
+    mode="EDIT" />
+
+    <!-- Display a header with details about the record -->
+    <div class="slds-form--stacked">
+        <div class="slds-form-element">
+            <label class="slds-form-element__label" for="recordName">Name: </label>
+            <div class="slds-form-element__control">
+              <ui:outputText value="{!v.accountRecord.Name}"/>
+            </div>
+        </div>
+    </div>
+
+    <!-- Display Lightning Data Service errors, if any -->
+    <aura:if isTrue="{!not(empty(v.recordSaveError))}">
+        <br />
+        	Error: <ui:outputText value="{!v.recordSaveError}"/>
+    </aura:if>
+
+    <!-- Display an editing form -->
+    <lightning:input aura:id="recordName" name="recordName" label="Name"
+                  value="{!v.accountRecord.Name}" required="true"/>
+
+     <ui:button label="Save Account" press="{!c.saveAccount}"/>
+</aura:component>

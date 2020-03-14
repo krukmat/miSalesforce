@@ -1,0 +1,15 @@
+{
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/.sfdx": true
+  },
+  "salesforcedx-vscode-core.retrieve-test-code-coverage": true,
+  "apexdox.docblock.alignItems": true,
+  "salesforcedx-vscode-core.push-or-deploy-on-save.enabled": true,
+  "apexPMD.additionalClassPaths": [
+    "/Users/matiasleandrokruk/pmd-bin/lib/*"
+  ],
+  "apexPMD.pmdBinPath": "/Users/matiasleandrokruk/pmd-bin/",
+  "git.ignoreLimitWarning": true
+}

@@ -1,0 +1,5 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:lightningQuickAction,force:hasRecordId" access="global" controller="PersonAccountRelationController">
+    <aura:handler  name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute type="Id" name="personContactId"/>
+	<lightning:button variant="brand" label="Relacion" title="Relacion" onclick="{! c.handleClick }" />
+</aura:component>

@@ -1,0 +1,17 @@
+<aura:component description="FileUploadContainer" controller="S3UploaderController" implements="flexipage:availableForAllPageTypes">
+	
+   <aura:attribute name="policy" type="String"/>
+   <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+   <form aura:id="form" id="form" name="form" action="https://media.trex.test2.s3.amazonaws.com/" method="POST" enctype="multipart/form-data">
+        <fieldset>
+            <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000000" />
+            <input type="hidden"  name="key"  id="key" /> 
+            <input type="hidden" name="AWSAccessKeyId" value="AKIAIOA5XA73TQIZQP4Q" /> 
+            <input type="hidden"  name="policy" value="{!v.policy}" /> 
+            <input type="file" name="file" id="file" />        
+            <button type="submit" onclick="">Upload Files</button>            
+        </fieldset>
+   </form>
+
+</aura:component>

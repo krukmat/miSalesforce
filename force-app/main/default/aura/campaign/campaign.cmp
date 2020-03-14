@@ -1,0 +1,4 @@
+<aura:component >
+    <c:campaignHeader ></c:campaignHeader>
+    <c:campaignList ></c:campaignList>
+</aura:component>
