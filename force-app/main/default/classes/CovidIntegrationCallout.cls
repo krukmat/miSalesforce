@@ -1,5 +1,5 @@
 public with sharing class CovidIntegrationCallout {
-    public final static String URL = 'https://googlecovid.herokuapp.com/api/scrape/?email=%1&firstname=%2&lastname=%3';  
+    public final static String URL = 'https://corona-google.herokuapp.com/api/scrape/?email=%1&firstname=%2&lastname=%3';  
     public List<IntegrationResponse> results = new List<IntegrationResponse>();
 
     public class IntegrationResponse {

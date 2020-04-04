@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Health_professional_reference__c</fullName>
+    <externalId>false</externalId>
+    <label>Health professional reference</label>
+    <referenceTo>Health_professional_reference__c</referenceTo>
+    <relationshipLabel>Health professional reference word cts</relationshipLabel>
+    <relationshipName>Health_professional_reference_word_cts</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

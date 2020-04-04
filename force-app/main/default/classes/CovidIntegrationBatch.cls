@@ -1,6 +1,6 @@
 global class CovidIntegrationBatch implements Database.Batchable<sObject>, Database.AllowsCallouts{
 
-    private static final string query = 'SELECT ID, email__c, first__c, last__c, full_name__c, Processed__c FROM Health_professional__c WHERE Processed__c = False';
+    private static final string query = 'SELECT ID, email__c, first__c, last__c,Processed__c FROM Health_professional__c WHERE Processed__c = False LIMIT 100';
     global Database.QueryLocator start(Database.BatchableContext BC){
         return Database.getQueryLocator(query);
      }
@@ -8,7 +8,7 @@ global class CovidIntegrationBatch implements Database.Batchable<sObject>, Datab
      global void execute(Database.BatchableContext BC,  List<sObject> scope){
         List<Health_professional_reference__c> referencesToUpsert = new List<Health_professional_reference__c>(); 
         for (Health_professional__c prof : (List<Health_professional__c>) scope){
-            try{
+            if (String.isNotBlank(prof.email__c) && String.isNotBlank(prof.first__c) && String.isNotBlank(prof.last__c)){
                 CovidIntegrationCallout callout = new CovidIntegrationCallout();
                 callout.doCallout(prof.email__c, prof.first__c, prof.last__c);
                 //TODO: Guardar lo que esta en CovidIntegrationCallout.results
@@ -27,16 +27,18 @@ global class CovidIntegrationBatch implements Database.Batchable<sObject>, Datab
                     referenceSF.Health_professional__c = prof.Id;
                     referencesToUpsert.add(referenceSF);
                 }
-                prof.processed__c = True;   
+                
             }
+            //try{
+                
+            /*}
             catch(Exception exc){
-            }
+            }*/
         }      
         upsert referencesToUpsert;
         update scope;
      }
   
      global void finish(Database.BatchableContext BC){
-  
      }
 }
