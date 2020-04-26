@@ -1,3 +1,0 @@
-- name: PMD Source Code Analyzer Action
-  uses: sfdx-actions/setup-pmd@v1
-  
