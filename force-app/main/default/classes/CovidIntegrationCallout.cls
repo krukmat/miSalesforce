@@ -10,17 +10,17 @@ public with sharing class CovidIntegrationCallout {
             Http http = new Http();
             HttpRequest request = new HttpRequest();
             request.setTimeout(120000);
-            String url = URL.replace('%1', email);
-            url = url.replace('%2', firstname);
-            url = url.replace('%3', lastname);
-            request.setEndpoint(url);
+            String urlLocal = CovidIntegrationCallout.URL.replace('%1', email);
+            urlLocal = urlLocal.replace('%2', firstname);
+            urlLocal = urlLocal.replace('%3', lastname);
+            request.setEndpoint(urlLocal);
             request.setMethod('GET');
             HttpResponse response = http.send(request);
             // If the request is successful, parse the JSON response.
             if (response.getStatusCode() == 200) {
                 // Deserialize the JSON string into collections of primitive data types.
-                results = (List<IntegrationResponse>) JSON.deserialize(response.getBody(), List<IntegrationResponse>.class);                
-                system.debug(results);
+                this.results = (List<IntegrationResponse>) JSON.deserialize(response.getBody(), List<IntegrationResponse>.class);                
+                system.debug(this.results);
             }
     }
 }

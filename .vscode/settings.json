@@ -11,5 +11,8 @@
     "/Users/matiasleandrokruk/pmd-bin/lib/*"
   ],
   "apexPMD.pmdBinPath": "/Users/matiasleandrokruk/pmd-bin/",
-  "git.ignoreLimitWarning": true
+  "git.ignoreLimitWarning": true,
+  "apexPMD.rulesets": [
+    "/Users/matiasleandrokruk/Documents/pmd/apex_ruleset.xml"
+  ]
 }

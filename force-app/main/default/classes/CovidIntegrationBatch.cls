@@ -1,11 +1,11 @@
 global class CovidIntegrationBatch implements Database.Batchable<sObject>, Database.AllowsCallouts{
 
-    private static final string query = 'SELECT ID, email__c, first__c, last__c,Processed__c FROM Health_professional__c WHERE Processed__c = False LIMIT 100';
-    global Database.QueryLocator start(Database.BatchableContext BC){
-        return Database.getQueryLocator(query);
+    private static final string QUERY = 'SELECT ID, email__c, first__c, last__c,Processed__c FROM Health_professional__c WHERE Processed__c = False LIMIT 100';
+    global Database.QueryLocator start(Database.BatchableContext bC){
+        return Database.getQueryLocator(CovidIntegrationBatch.QUERY);
      }
   
-     global void execute(Database.BatchableContext BC,  List<sObject> scope){
+     global void execute(Database.BatchableContext bC,  List<sObject> scope){
         List<Health_professional_reference__c> referencesToUpsert = new List<Health_professional_reference__c>(); 
         for (Health_professional__c prof : (List<Health_professional__c>) scope){
             if (String.isNotBlank(prof.email__c) && String.isNotBlank(prof.first__c) && String.isNotBlank(prof.last__c)){
@@ -39,6 +39,6 @@ global class CovidIntegrationBatch implements Database.Batchable<sObject>, Datab
         update scope;
      }
   
-     global void finish(Database.BatchableContext BC){
+     global void finish(Database.BatchableContext bC){
      }
 }
