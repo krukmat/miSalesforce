@@ -18,5 +18,5 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     steps:
-      - uses: sfdx-actions/apexpmd@v1
+      - uses: sfdx-actions/apexpmd
 
