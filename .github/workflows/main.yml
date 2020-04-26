@@ -20,5 +20,5 @@ jobs:
     steps:
       - uses: krukmat/setup-pmd@v0.4
       - name: run-pmd
-        run: pmd -R category/apex/design.xml -f text
+        run: pmd -d ./force-app/main/default/classSes -R category/apex/design.xml -f text
 
