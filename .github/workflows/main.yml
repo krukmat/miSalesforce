@@ -8,4 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: sfdx-actions/setup-pmd@v1
+      - name: Setup JRE
+        uses: actions/setup-java@v1
+        with:
+          java-version: '13.0.2'
+          java-package: jre
+          architecture: x64
+
+      - uses: mcanog/setup-pmd@v1
