@@ -1,2 +1,11 @@
-- name: PMD Source Code Analyzer Action
-  uses: sfdx-actions/setup-pmd@v1
+name: PMD Source Code Analyzer on Push
+
+on: [push]
+
+jobs:
+  pmd:
+  
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: sfdx-actions/setup-pmd@v1
