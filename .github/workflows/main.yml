@@ -18,7 +18,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     steps:
-      - uses: krukmat/setup-pmd@v0.2
+      - uses: krukmat/setup-pmd@v0.3
       - name: run-pmd
         run: pmd -d ./force-app/main/default/classes -R category/apex/design.xml -f text
 
